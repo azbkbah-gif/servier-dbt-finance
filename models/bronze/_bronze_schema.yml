@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: bz_sap_bkpf
+    columns:
+      - name: bkpf_pk
+        data_tests:
+          - unique
+          - not_null
+      - name: code_societe
+        data_tests:
+          - not_null
+      - name: date_comptable
+        data_tests:
+          - not_null
+
+  - name: bz_sap_bseg
+    columns:
+      - name: bseg_pk
+        data_tests:
+          - unique
+          - not_null
+      - name: sens_sh
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['S', 'H']
+              # Cette option indique à dbt de ne pas lever d'erreur si la valeur est manquante
+              config:
+                where: "sens_sh IS NOT NULL"
