@@ -43,4 +43,4 @@ INNER JOIN bseg b
     ON h.code_societe    = b.code_societe 
    AND h.numero_document = b.numero_document 
    AND h.exercice        = b.exercice 
-WHERE h.statut_document != 'R' 
+WHERE COALESCE(h.statut_document, '') != 'R'
