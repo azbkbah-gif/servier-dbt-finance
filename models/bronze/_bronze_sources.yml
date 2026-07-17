@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: sap_raw
+    description: "Données brutes SAP chargées dans BigQuery"
+    database: servier-finace-dbt # Ton ID de projet GCP exact (avec la faute d'orthographe)
+    schema: raw_sap_ingestion     # Ton dataset BigQuery cible
+    tables:
+      - name: bkpf
+        description: "En-têtes documents comptables"
+      - name: bseg
+        description: "Postes documents comptables"
+      - name: lfa1
+        description: "Fournisseurs"
+      - name: kna1
+        description: "Clients"
+      - name: vbrk
+        description: "En-têtes factures ventes"
+      - name: vbrp
+        description: "Postes factures ventes"
+      - name: ekko
+        description: "En-têtes commandes achats"
+      - name: ekpo
+        description: "Postes commandes achat"
