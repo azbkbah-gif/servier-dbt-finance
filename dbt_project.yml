@@ -1,6 +1,5 @@
 # Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
+# and underscores.
 name: 'servier_dbt_finance'
 version: '1.0.0'
 config-version: 2
@@ -10,12 +9,12 @@ profile: 'servier_finance'
 
 # These configurations specify where dbt should look for different types of files.
 model-paths: ["models"]
-analysis-paths: ["analyses"]
-test-paths: ["tests"]
 seed-paths: ["seeds"]
+test-paths: ["tests"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
+target-path: 'target'
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
@@ -25,13 +24,27 @@ models:
   servier_dbt_finance:
     bronze:
       +schema: bronze_sap
-      +materialized: view
+      +materialized: view          # Bronze = vue légère
       +tags: ['bronze', 'sap']
+      
     silver:
       +schema: silver_finance
-      +materialized: table
+      +materialized: table         # Silver = table physique
       +tags: ['silver']
+      
     gold:
       +schema: gold_finance
-      +materialized: table
+      +materialized: table         # Gold = table physique
       +tags: ['gold']
+      
+      # Sous-dossiers spécifiques du niveau Gold
+      comptabilite:
+        +tags: ['gold', 'comptabilite', 'power_bi']
+      achats:
+        +tags: ['gold', 'achats', 'power_bi']
+      ventes:
+        +tags: ['gold', 'ventes', 'power_bi']
+      tresorerie:
+        +tags: ['gold', 'tresorerie', 'power_bi']
+      budget:
+        +tags: ['gold', 'budget', 'power_bi']
