@@ -1,0 +1,9 @@
+code_societe,raison_sociale,pays,devise,groupe,adresse,ville,code_postal,actif
+1000,Servier France SAS,FR,EUR,SERF,22 rue Garnier,Suresnes,92284,true
+1010,Servier Industrie SA,FR,EUR,SERI,905 route de Saran,Gidy,45520,true
+1020,Servier Lab,FR,EUR,SERL,22 rue Garnier,Suresnes,92284,true
+2000,Servier Benelux SA,BE,EUR,SERB,Avenue Louise 326,Bruxelles,1050,true
+3000,Servier Laboratories Ltd,GB,GBP,SERU,Wexham Road,Slough,SL2 5NW,true
+4000,Servier Inc,US,USD,SERUS,200 Connell Drive,Berkeley Heights,NJ 07922,true
+5000,Servier Deutschland GmbH,DE,EUR,SERD,Elsenheimerstrasse 53,Munich,80687,true
+6000,Servier España SL,ES,EUR,SERE,Avda de los Pirineos 7,Madrid,28703,true

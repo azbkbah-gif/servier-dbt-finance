@@ -1,0 +1,40 @@
+code_societe,compte_gl,centre_cout,annee_mois,annee,mois,montant_budget,libelle_poste
+1000,601000,CC-PROD-001,2026-01,2026,1,350000,Achats matières premières production
+1000,601000,CC-PROD-001,2026-02,2026,2,330000,Achats matières premières production
+1000,601000,CC-PROD-001,2026-03,2026,3,360000,Achats matières premières production
+1000,601000,CC-PROD-001,2026-04,2026,4,340000,Achats matières premières production
+1000,601000,CC-PROD-001,2026-05,2026,5,350000,Achats matières premières production
+1000,601000,CC-PROD-001,2026-06,2026,6,370000,Achats matières premières production
+1000,601000,CC-PROD-002,2026-01,2026,1,200000,Achats matières premières production
+1000,601000,CC-PROD-002,2026-02,2026,2,210000,Achats matières premières production
+1000,601000,CC-PROD-002,2026-03,2026,3,195000,Achats matières premières production
+1000,601100,CC-IT-001,2026-01,2026,1,200000,Prestations informatiques externes
+1000,601100,CC-IT-001,2026-02,2026,2,200000,Prestations informatiques externes
+1000,601100,CC-IT-001,2026-03,2026,3,200000,Prestations informatiques externes
+1000,601100,CC-IT-001,2026-04,2026,4,200000,Prestations informatiques externes
+1000,601100,CC-IT-001,2026-05,2026,5,200000,Prestations informatiques externes
+1000,601100,CC-IT-001,2026-06,2026,6,200000,Prestations informatiques externes
+1000,621100,CC-IT-001,2026-01,2026,1,110000,Licences logiciels
+1000,621100,CC-IT-001,2026-02,2026,2,55000,Licences logiciels
+1000,621100,CC-IT-001,2026-03,2026,3,65000,Licences logiciels
+1000,604100,CC-PROD-001,2026-01,2026,1,290000,Sous-traitance fabrication
+1000,604100,CC-PROD-001,2026-02,2026,2,280000,Sous-traitance fabrication
+1000,604100,CC-PROD-001,2026-03,2026,3,285000,Sous-traitance fabrication
+1000,604100,CC-PROD-002,2026-01,2026,1,195000,Sous-traitance fabrication
+1000,604100,CC-PROD-002,2026-02,2026,2,190000,Sous-traitance fabrication
+1000,604100,CC-PROD-002,2026-03,2026,3,200000,Sous-traitance fabrication
+1000,622600,CC-DAF-001,2026-01,2026,1,75000,Honoraires conseils juridiques et audit
+1000,622600,CC-DAF-001,2026-02,2026,2,100000,Honoraires conseils juridiques et audit
+1000,622600,CC-DAF-001,2026-03,2026,3,80000,Honoraires conseils juridiques et audit
+1000,624100,CC-PROD-001,2026-01,2026,1,45000,Transport et logistique
+1000,624100,CC-PROD-001,2026-02,2026,2,45000,Transport et logistique
+1000,624100,CC-PROD-001,2026-03,2026,3,45000,Transport et logistique
+1000,601200,CC-RD-001,2026-01,2026,1,42000,Achats consommables R&D
+1000,601200,CC-RD-001,2026-02,2026,2,40000,Achats consommables R&D
+1000,601200,CC-RD-001,2026-03,2026,3,41000,Achats consommables R&D
+1010,601000,CC-PROD-003,2026-01,2026,1,300000,Achats matières premières production
+1010,601000,CC-PROD-003,2026-02,2026,2,295000,Achats matières premières production
+1010,601000,CC-PROD-003,2026-03,2026,3,310000,Achats matières premières production
+1010,604100,CC-PROD-003,2026-01,2026,1,450000,Sous-traitance façonnage
+1010,604100,CC-PROD-003,2026-02,2026,2,440000,Sous-traitance façonnage
+1010,604100,CC-PROD-003,2026-03,2026,3,460000,Sous-traitance façonnage

@@ -1,5 +1,13 @@
 version: 2
 
+# Déclaration de la source brute Airbyte
+sources:
+  - name: raw_sap
+    schema: raw_sap_ingestion
+    tables:
+      - name: cskt
+
+# Déclaration de tes modèles de transformation (Bronze)
 models:
   - name: bz_sap_bkpf
     columns:
@@ -25,6 +33,20 @@ models:
           - accepted_values:
               arguments:
                 values: ['S', 'H']
-              # Cette option indique à dbt de ne pas lever d'erreur si la valeur est manquante
               config:
                 where: "sens_sh IS NOT NULL"
+
+  - name: bz_sap_cskt
+    description: "Table Bronze des textes des centres de coûts SAP (CSKT)"
+    columns:
+      - name: KOSTL
+        description: "Code du centre de coût"
+        data_tests:
+          - not_null
+      - name: SPRAS
+        description: "Code langue converti (F = Français, E = Anglais)"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['F', 'E']

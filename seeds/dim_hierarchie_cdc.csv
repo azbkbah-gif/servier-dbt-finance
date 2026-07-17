@@ -1,0 +1,13 @@
+code_centre_cout,division,departement,direction,business_unit
+CC-PROD-001,Opérations,Production France,Direction des Opérations,Pharmaceutical Operations
+CC-PROD-002,Opérations,Production France,Direction des Opérations,Pharmaceutical Operations
+CC-PROD-003,Opérations,Production Industrielle,Direction des Opérations,Industrial Operations
+CC-RD-001,R&D,Recherche Chimique,Direction R&D,Research & Development
+CC-RD-002,R&D,Essais Cliniques,Direction R&D,Research & Development
+CC-MKTG-001,Commercial,Marketing France,Direction Commerciale,Commercial France
+CC-MKTG-002,Commercial,Marketing Digital,Direction Commerciale,Commercial France
+CC-IT-001,Support,DSI,Direction Générale,Corporate Functions
+CC-DAF-001,Support,DAF,Direction Générale,Corporate Functions
+CC-DRH-001,Support,DRH,Direction Générale,Corporate Functions
+CC-VENTE-001,Commercial,Force de Vente,Direction Commerciale,Commercial France
+CC-VENTE-002,Commercial,Export,Direction Commerciale,International
