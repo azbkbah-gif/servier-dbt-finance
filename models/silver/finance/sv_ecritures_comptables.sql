@@ -1,46 +1,26 @@
-{{ 
-    config( 
-        materialized = 'table', 
-        tags = ['silver', 'comptabilite'] 
+{{ config(
+    materialized='table',
+    unique_key='facture_client_pk'
+) }} 
  
+WITH vbrk AS (SELECT * FROM {{ ref('bz_sap_vbrk') }}), 
+     kna1 AS (SELECT * FROM {{ ref('bz_sap_kna1') }}) 
  
-    ) 
-}} 
-  
-WITH bkpf AS (SELECT * FROM {{ ref('bz_sap_bkpf') }}), 
-     bseg AS (SELECT * FROM {{ ref('bz_sap_bseg') }}) 
-  
 SELECT 
-    CONCAT(b.code_societe,'_',b.numero_document,'_', 
-           CAST(b.exercice AS STRING),'_', 
-           CAST(b.numero_poste AS STRING))  AS ecriture_pk, 
+    CONCAT(CAST(h.code_societe AS STRING), '_', LTRIM(CAST(h.numero_facture AS STRING), '0')) AS facture_client_pk, 
     h.code_societe, 
-    h.numero_document, 
-    h.exercice, 
-    h.periode_comptable, 
-    h.date_piece, 
-    h.date_comptable, 
-    h.type_document, 
+    LTRIM(CAST(h.numero_facture AS STRING), '0') AS numero_facture, 
+    -- SAFE_CAST pour sécuriser le partitionnement de BigQuery
+    SAFE_CAST(h.date_facture AS DATE) AS date_facture, 
+    FORMAT_DATE('%Y-%m', SAFE_CAST(h.date_facture AS DATE)) AS annee_mois, 
+    LTRIM(CAST(h.code_client AS STRING), '0') AS code_client, 
+    c.raison_sociale                     AS nom_client, 
+    c.pays                               AS pays_client, 
     h.devise, 
-    h.reference_externe, 
-    h.texte_document, 
-    b.numero_poste, 
-    b.compte_gl, 
-    b.centre_cout, 
-    b.code_client, 
-    b.code_fournisseur, 
-    b.sens_sh, 
-    b.texte_poste, 
-    CASE 
-        WHEN b.sens_sh = 'S' THEN  b.montant_devise_societe 
-        WHEN b.sens_sh = 'H' THEN -b.montant_devise_societe 
-        ELSE 0 
-    END                                    AS montant_eur, 
-    b.montant_devise_societe               AS montant_absolu_eur, 
-    h.charge_timestamp 
-FROM bkpf h 
-INNER JOIN bseg b 
-    ON h.code_societe    = b.code_societe 
-   AND h.numero_document = b.numero_document 
-   AND h.exercice        = b.exercice 
-WHERE COALESCE(h.statut_document, '') != 'R'
+    h.montant_net_ht, 
+    (h.montant_net_ht + h.montant_tva)   AS montant_ttc, 
+    h.charge_timestamp
+FROM vbrk h 
+LEFT JOIN kna1 c ON LTRIM(CAST(h.code_client AS STRING), '0') = LTRIM(CAST(c.code_client AS STRING), '0')
+WHERE h.date_facture IS NOT NULL
+  AND COALESCE(h.statut_annulation, '') != 'X'
