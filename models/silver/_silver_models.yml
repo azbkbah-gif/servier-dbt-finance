@@ -1,0 +1,50 @@
+version: 2 
+ 
+models: 
+  - name: sv_ecritures_comptables 
+    description: > 
+      Vue comptable consolidée (jointure BKPF x BSEG). 
+      Granularité : 1 ligne = 1 poste de document comptable. 
+      Source : SAP S/4HANA via Airbyte / Bronze dbt. 
+    columns: 
+      - name: ecriture_pk 
+        description: 'Clé primaire unique du poste comptable' 
+        data_tests:  # Remplacé 'tests' par 'data_tests' (norme dbt récente)
+          - unique 
+          - not_null 
+ 
+      - name: date_comptable 
+        data_tests: 
+          - not_null 
+          - dbt_expectations.expect_column_values_to_be_of_type: 
+              column_type: date 
+ 
+      - name: sens_sh 
+        data_tests: 
+          - accepted_values: 
+              arguments:     # 👈 Correction du warning ici
+                values: ['S', 'H'] 
+ 
+      - name: code_fournisseur 
+        data_tests: 
+          - relationships: 
+              to: ref('bz_sap_lfa1') 
+              field: code_fournisseur 
+              config: 
+                severity: warn  # Warning car certains fournisseurs obsolètes 
+ 
+      - name: montant_eur 
+        data_tests: 
+          - dbt_expectations.expect_column_values_to_be_between: 
+              min_value: -10000000 
+              max_value: 10000000 
+ 
+  - name: sv_factures_fournisseurs 
+    columns: 
+      - name: facture_pk 
+        data_tests: [unique, not_null] 
+      - name: statut_paiement 
+        data_tests: 
+          - accepted_values: 
+              arguments:     # 👈 Correction du warning ici
+                values: ['SOLDE', 'EN_COURS', 'EN_RETARD']
