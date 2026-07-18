@@ -1,9 +1,13 @@
-{{ config(materialized='table', unique_key='facture_pk', 
-          partition_by={'field':'date_facture','data_type':'date'}) }} 
+{{ config(
+    materialized='table', 
+    unique_key='facture_pk', 
+    partition_by={'field':'date_facture','data_type':'date'}
+) }} 
  
 WITH factures AS ( 
     SELECT * FROM {{ ref('sv_ecritures_comptables') }} 
-    WHERE type_document IN ('RE','KR','KG')  -- Types factures fourn. SAP 
+    -- Sécurisation de la casse avec UPPER()
+    WHERE UPPER(type_document) IN ('RE','KR','KG')  
 ), 
  
 fournisseurs AS ( 
@@ -11,21 +15,21 @@ fournisseurs AS (
 ) 
  
 SELECT 
-    f.ecriture_pk                       AS facture_pk, 
+    f.ecriture_pk                               AS facture_pk, 
     f.code_societe, 
-    f.numero_document                   AS numero_facture, 
+    f.numero_document                           AS numero_facture, 
     f.exercice, 
-    f.date_piece                        AS date_facture, 
-    f.reference_externe                 AS num_facture_fournisseur, 
+    f.date_piece                                AS date_facture, 
+    f.reference_externe                         AS num_facture_fournisseur, 
     f.code_fournisseur, 
-    v.raison_sociale                    AS nom_fournisseur, 
-    v.pays                              AS pays_fournisseur, 
+    v.raison_sociale                            AS nom_fournisseur, 
+    v.pays                                      AS pays_fournisseur, 
     v.groupe_comptes, 
     f.compte_gl, 
     f.centre_cout, 
     SUM(f.montant_eur) OVER ( 
         PARTITION BY f.code_societe, f.numero_document, f.exercice 
-    )                                   AS montant_total_facture_eur, 
+    )                                           AS montant_total_facture_eur, 
     f.devise, 
  
     -- Délai standard Servier : 60 jours 
@@ -42,4 +46,5 @@ SELECT
  
 FROM factures f 
 LEFT JOIN fournisseurs v USING (code_fournisseur) 
-WHERE f.numero_poste = 1  -- 1 ligne par facture
+-- CAST en INT64 pour s'assurer que le filtre fonctionne qu'il y ait des zéros ou non (ex: '001' devient 1)
+WHERE CAST(f.numero_poste AS INT64) = 1
