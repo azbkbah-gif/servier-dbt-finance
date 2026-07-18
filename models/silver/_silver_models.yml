@@ -46,5 +46,5 @@ models:
       - name: statut_paiement 
         data_tests: 
           - accepted_values: 
-              arguments:     # 👈 Correction du warning ici
+              arguments:     # Correction du warning ici
                 values: ['SOLDE', 'EN_COURS', 'EN_RETARD']
