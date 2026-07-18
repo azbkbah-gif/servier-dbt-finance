@@ -1,5 +1,5 @@
 {{ config(
-    materialized='incremental',
+    materialized='table',
     unique_key='facture_client_pk', 
     partition_by={'field': 'date_facture', 'data_type': 'date'}
 ) }} 

@@ -1,4 +1,4 @@
-{{ config(materialized='incremental', unique_key='facture_pk', 
+{{ config(materialized='table', unique_key='facture_pk', 
           partition_by={'field':'date_facture','data_type':'date'}) }} 
  
 WITH factures AS ( 
